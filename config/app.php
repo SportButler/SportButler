@@ -51,7 +51,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'dbserver.team-upp.com'),
+    'url' => env('APP_URL', 'testsportbutler.mbdteam.local'),
 
     /*
     |--------------------------------------------------------------------------
@@ -103,7 +103,7 @@ return [
     |
     */
 
-    'key' => env('APP_KEY', 'base64:QFlsalAd76+Hyra/p4L9tZS1dlh3SsndHfNH7RoWxts='),
+    'key' => env('APP_KEY', 'base64:Pnc88T8vhQsZUXfqgnrA2cnX1+OKz5nZpWKWUPnVrv4='),
 
     'cipher' => 'AES-256-CBC',
 
