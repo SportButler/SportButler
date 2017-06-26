@@ -288,34 +288,34 @@ Veranstaltungs Zeitraum
                         @foreach($events as $event)
                         {
                             @if ($role=='admin')
-                            @if($event->currentplayers == $event->players)
-                          title : '{{ $event->field->name }}  {{ $event->currentplayers }}/{{ $event->players }}',
-                          start : '{{ $event->start }}',
-                          end : '{{ $event->end }}',
-                          url : 'http://dbserver.team-upp.com/admin/events/{{ $event->id }}',
-                          color: 'red'
-                          @else
-                          title : '{{ $event->field->name }}  {{ $event->currentplayers }}/{{ $event->players}}',
-                          start : '{{ $event->start }}',
-                          end : '{{ $event->end }}',
-                          url : 'http://dbserver.team-upp.com/admin/events/{{ $event->id }}',
-                          color: 'green'
-                          @endif
+                              @if($event->currentplayers == $event->players)
+                                title : '{{ $event->field->name }}  {{ $event->currentplayers }}/{{ $event->players }}',
+                                start : '{{ $event->start }}',
+                                end : '{{ $event->end }}',
+                                url : '/admin/events/{{ $event->id }}',
+                                color: 'red'
+                              @else
+                                title : '{{ $event->field->name }}  {{ $event->currentplayers }}/{{ $event->players}}',
+                                start : '{{ $event->start }}',
+                                end : '{{ $event->end }}',
+                                url : '/admin/events/{{ $event->id }}',
+                                color: 'green'
+                              @endif
                             @else
-                          @if($event->currentplayers == $event->players)
-                          title : '{{ $event->field->name }}  {{ $event->currentplayers }}/{{ $event->players }}',
-                          start : '{{ $event->start }}',
-                          end : '{{ $event->end }}',
-                          url : 'http://dbserver.team-upp.com/events/{{ $event->id }}',
-                          color: 'red'
-                          @else
-                          title : '{{ $event->field->name }}  {{ $event->currentplayers }}/{{ $event->players}}',
-                          start : '{{ $event->start }}',
-                          end : '{{ $event->end }}',
-                          url : 'http://dbserver.team-upp.com/events/{{ $event->id }}',
-                          color: 'green'
-                          @endif
-                          @endif
+                              @if($event->currentplayers == $event->players)
+                                title : '{{ $event->field->name }}  {{ $event->currentplayers }}/{{ $event->players }}',
+                                start : '{{ $event->start }}',
+                                end : '{{ $event->end }}',
+                                url : '/events/{{ $event->id }}',
+                                color: 'red'
+                              @else
+                                title : '{{ $event->field->name }}  {{ $event->currentplayers }}/{{ $event->players}}',
+                                start : '{{ $event->start }}',
+                                end : '{{ $event->end }}',
+                                url : '/events/{{ $event->id }}',
+                                color: 'green'
+                              @endif
+                            @endif
                         },
                         @endforeach
                     ]

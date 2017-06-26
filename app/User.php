@@ -13,20 +13,21 @@ class User extends Authenticatable
   */
 
   public function events(){
-    return $this->belongsToMany(Event::class);
+    return $this->belongsToMany('App\Event');
   }
 
   public function jokes(){
-      return $this->hasMany('App\Joke');
+    return $this->hasMany('App\Joke');
   }
 
   public function fields(){
-      return $this->hasMany('App\Field');
+    return $this->hasMany('App\Field');
   }
 
   public function clubs(){
-      return $this->belongsToMany(Club::class);
+    return $this->belongsToMany(Club::class);
   }
+
   public function hasClubs($club){
     return $this->clubs()->where('club_id', $club->id)->exists();
   }

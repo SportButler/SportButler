@@ -105,9 +105,19 @@
 
       </h2><br>
     <div class="form-group">
+      <?php
+      $datetime = new DateTime($event->start);
+      //$date = $event->start;
+      $date = date_format($datetime,"d.m.Y");
+      $endtime = new DateTime($event->end);
+      $start = date_format($datetime,"H:i");
+      $end = date_format($endtime,"H:i");
+      ?>
+
       <strong>Ort: </strong>{{ $event->field->name }}<br>
-      <strong>Uhrzeit: </strong>{{ $event->start }}<br>
-      <strong>Ende: </strong>{{ $event->end }}<br><br>
+      <strong>Datum: </strong>{{ $date }}<br>
+      <strong>Uhrzeit: </strong>{{ $start }}<br>
+      <strong>Ende: </strong>{{ $end }}<br><br>
 
       <strong>Veranstaltungs Informationen: </strong>{{ $event->description }}<br>
     </div>

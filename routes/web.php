@@ -23,9 +23,9 @@ Route::group(['middleware' => 'admin'], function(){
 
   Route::post('/admin/{user}/edit', 'AdminController@update');
 
-  Route::get('admin/create', 'AdminController@create');
+  Route::get('/admin/create', 'AdminController@create');
 
-  Route::post('admin/create', 'AdminController@store');
+  Route::post('/admin/create', 'AdminController@store');
 
 
 
@@ -90,6 +90,8 @@ Route::group(['middleware' => 'admin'], function(){
 
 
 
+  Route::get('/admin/events', 'EventsController@index');
+
   Route::get('/admin/events/{event}', 'EventsController@show');
 
   Route::get('/admin/event/create', 'EventsController@create');
@@ -124,6 +126,7 @@ Route::group(['middleware' => 'kunde'], function(){
   Route::post('/user/club/leave/{club}', 'KundenController@leave');
 
 
+  Route::get('/user/events', 'EventsController@index');
 
   Route::get('/user/events/{event}', 'EventsController@show');
 
@@ -227,6 +230,7 @@ Route::group(['middleware' => 'lieferant'], function(){
 
 
 
+  Route::get('/events', 'EventsController@index');
 
   Route::get('/events/{event}', 'EventsController@show');
 

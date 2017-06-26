@@ -13,10 +13,6 @@ use DateTime;
 use DateInterval;
 use DatePeriod;
 
-
-
-
-
 class EventsController extends Controller
 
 {
@@ -29,9 +25,34 @@ class EventsController extends Controller
   }
 
   public function index(){
-      $events = Event::latest()->get();
 
-      return view('events.index', compact('events'));
+      $id = Sentinel::getUser()->id;
+
+      $user = User::find($id);
+
+      $events = $user->events();
+
+      $clubs = $user->clubs();
+
+      $club = $clubs->first();
+
+      $events = $events->orderBy('start')->get();
+
+      $user = Sentinel::getUser();
+
+      if($user->inRole('lieferant')){
+        $role = 'lieferant';
+      }
+
+      if($user->inRole('kunde')){
+        $role = 'kunde';
+      }
+
+      if($user->inRole('admin')){
+        $role = 'admin';
+      }
+
+      return view('events.index', compact('events', 'role'));
   }
 
 
@@ -253,6 +274,7 @@ class EventsController extends Controller
     $event = Event::find($id);
     $user_id = Sentinel::getUser()->id;
     $event->users()->detach($user_id);
+
 
     $event->currentplayers = $event->currentplayers - 1;
     $event->save();
