@@ -68,10 +68,13 @@ class AdminController extends Controller
     public function deactivate_user(Request $request, $id) {
 
       $activation = Activation::find($id);
+
       if($activation->completed = true){
         $activation->completed = false;
       }
+
       $activation->save();
+
       return redirect ('/admin/mitglieder');
 
     }
@@ -95,38 +98,38 @@ class AdminController extends Controller
     public function store(Request $request)
     {
 
-        $this->validate(request(), [
+      $this->validate(request(), [
 
-            'email' => 'required|email|unique:users',
+          'email' => 'required|email|unique:users',
 
-            'first_name' => 'required',
+          'first_name' => 'required',
 
-            'last_name' => 'required',
+          'last_name' => 'required',
 
-            'password' => 'required',
+          'password' => 'required',
 
-            'password_confirmation' => 'required|same:password'
+          'password_confirmation' => 'required|same:password'
 
-        ]);
+      ]);
 
-        $new_user = Sentinel::registerAndActivate(request(['email', 'first_name', 'last_name', 'password', 'password_confirmation']));
+      $new_user = Sentinel::registerAndActivate(request(['email', 'first_name', 'last_name', 'password', 'password_confirmation']));
 
-        $role = Sentinel::findRoleBySlug('lieferant');
+      $role = Sentinel::findRoleBySlug('lieferant');
 
-        $role->users()->attach($new_user);
+      $role->users()->attach($new_user);
 
-        $user_id = $new_user->id;
+      $user_id = $new_user->id;
 
-        $id = Sentinel::getUser()->id;
+      $id = Sentinel::getUser()->id;
 
-        $user = User::find($id);
+      $user = User::find($id);
 
-        foreach($user->clubs as $club){
-          $club->users()->attach($user_id);
-        }
+      foreach($user->clubs as $club){
+        $club->users()->attach($user_id);
+      }
 
 
-        return redirect('/admin');
+      return redirect('/admin');
     }
 
     /**
@@ -159,36 +162,36 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-     public function update(Request $request, $id)
-     {
-         $user = Sentinel::findById($id);
-         $user->email = $request->email;
-         $user->password = Hash::make($request->password);
+   public function update(Request $request, $id)
+   {
+     $user = Sentinel::findById($id);
+     $user->email = $request->email;
+     $user->password = Hash::make($request->password);
 
-         $user->save();
+     $user->save();
 
 
-       //  Field::find($id)->update($request->all());
+   //  Field::find($id)->update($request->all());
 
-         return redirect ('/admin');
+     return redirect ('/admin');
 
-     }
+    }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int  $id‚
      * @return \Illuminate\Http\Response
      */
-     public function destroy($id)
-     {
-       $user = Sentinel::findById($id);
-       Activation::remove($user);
+   public function destroy($id)
+   {
+     $user = Sentinel::findById($id);
+     Activation::remove($user);
 
-       $role = Sentinel::findRoleByName('Lieferant');
-       $role->users()->detach($user);
+     $role = Sentinel::findRoleByName('Lieferant');
+     $role->users()->detach($user);
 
-       User::where('id', $id)->delete();
-       return redirect ('/admin/mitglieder');
-     }
+     User::where('id', $id)->delete();
+     return redirect ('/admin/mitglieder');
+   }
 }
