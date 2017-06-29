@@ -9,7 +9,7 @@
   @foreach($events as $event)
     <?php
     $dt = new DateTime();
-    $dt = $dt->format('Y-m-d H:i:s');
+    $dt = $dt->format('d.m.Y H:i:s');
      ?>
 
      <!-- Nur Events die noch nicht angefangen haben -->
@@ -81,7 +81,7 @@
   @foreach($events as $event)
     <?php
     $dt = new DateTime();
-    $dt = $dt->format('Y-m-d H:i:s');
+    $dt = $dt->format('Y.m.d H:i:s');
      ?>
      <!-- Nur Events die schon vorbei sind -->
 
@@ -90,7 +90,7 @@
     <?php
     $datetime = new DateTime($event->start);
     //$date = $event->start;
-    $date = date_format($datetime,"d-m-Y");
+    $date = date_format($datetime,"d.m.Y");
     $endtime = new DateTime($event->end);
     $start = date_format($datetime,"H:i");
     $end = date_format($endtime,"H:i");

@@ -37,11 +37,13 @@ class AdminController extends Controller
 
       $user = User::find($id);
 
+      $clubs = Club::all();
+
       $activations = Activation::all();
 
       $users = User::all();
 
-      return view('admin.index', compact('activations', 'user', 'users', 'id', 'lieferanten', 'kunden', 'admins'));
+      return view('admin.index', compact('activations', 'user', 'users', 'id', 'lieferanten', 'kunden', 'admins', 'clubs'));
     }
 
     public function activation()
@@ -187,6 +189,6 @@ class AdminController extends Controller
        $role->users()->detach($user);
 
        User::where('id', $id)->delete();
-       return redirect ('/admin');
+       return redirect ('/admin/mitglieder');
      }
 }
