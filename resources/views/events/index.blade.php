@@ -5,140 +5,179 @@
   Sie haben sich zur Zeit für keine Veranstaltung angemeldet!
 @else
 <!-- Veranstaltung vorhanden und bevorstehend-->
-  <p>Bevorstehende Veranstaltungen:</p>
-  @foreach($events as $event)
+<p>Bevorstehende Veranstaltungen (test):</p>
+<div id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="card">
+  @foreach ($events as $event)
     <?php
     $dt = new DateTime();
-    $dt = $dt->format('d.m.Y H:i:s');
+    $dt = $dt->format('Y-m-d H:i:s');
+    $users = $event->users;
      ?>
+    @if($dt < $event->start)
 
-     <!-- Nur Events die noch nicht angefangen haben -->
+      <div class="card-header" role="tab" id="headingOne">
+        <div class="row">
+          <h5 class="mb-0 mr-auto">
+             <a data-toggle="collapse" data-parent="#accordion" href="#{{ $event->description }}{{$event->id}}" aria-expanded="false" aria-controls="{{ $event->description }}{{$event->id}}" class="sports-vert">
+               <?php
+                 $datetime = new DateTime($event->start);
+                 //$date = $event->start;
+                 $date = date_format($datetime,"d.m.Y");
+                 $endtime = new DateTime($event->end);
+                 $start = date_format($datetime,"H:i");
+                 $end = date_format($endtime,"H:i");
+               ?>
+               {{$date}} {{$start}} - {{$end}}
+               {{$event->currentplayers}}/{{$event->players}}
+               {{$event->description }}
+               {{$event->id }}
+             </a>
+          </h5>
 
-     @if($dt < $event->start)
+          <div style="margin: 0px" class="row">
+            @if($role == 'admin')
+              <a href="/admin/events/{{ $event->id }}/edit" class="btn btn-primary">bearbeiten</a>
 
-     <!-- TODO: link auf Details der Veranstaltung -->
+              <form action="{{ url('/admin/events/leave', [$event->id]) }}" method="POST">
 
-    {{$event->description }}
-    <?php
-    $datetime = new DateTime($event->start);
-    //$date = $event->start;
-    $date = date_format($datetime,"d.m.Y");
-    $endtime = new DateTime($event->end);
-    $start = date_format($datetime,"H:i");
-    $end = date_format($endtime,"H:i");
-    ?>
-    {{$date}} {{$start}} - {{$end}}
-    {{$event->players}}/{{$event->currentplayers}}
+                {{ csrf_field() }}
 
-    <!-- Buttons für jede Art von User -->
+                <input type ="submit" value="Verlassen" class="btn btn-primary">
+              </form><br>
+            @elseif($role == 'kunde')
+              @if($event->user_id == $id)
+              <a href="/user/events/{{ $event->id }}/edit" class="btn btn-primary">bearbeiten</a>
+              @endif
+              <form action="{{ url('/user/events/leave', [$event->id]) }}" method="POST">
 
-      @if($role == 'admin')
-      <form action="{{ url('/admin/events', [$event->id]) }}" method="GET">
+                {{ csrf_field() }}
 
-        {{ csrf_field() }}
+                <input type ="submit" value="Verlassen" class="btn btn-primary">
+              </form><br>
+            @else
+            <a href="/events/{{ $event->id }}/edit" class="btn btn-primary">bearbeiten</a>
 
-        <input type ="submit" value="Info" class="btn btn-primary">
-      </form><br>
-      <form action="{{ url('/admin/events/leave', [$event->id]) }}" method="POST">
+              <form action="{{ url('/events/leave', [$event->id]) }}" method="POST">
 
-        {{ csrf_field() }}
+                {{ csrf_field() }}
 
-        <input type ="submit" value="Verlassen" class="btn btn-primary">
-      </form><br>
-      @elseif($role == 'kunde')
-      <form action="{{ url('/user/events', [$event->id]) }}" method="GET">
+                <input type ="submit" value="Verlassen" class="btn btn-primary">
+              </form><br>
+            @endif
+          </div>
+      </div>
+  </div>
+      <div id="{{ $event->description }}{{$event->id}}" class="collapse" role="tabpanel" aria-labelledby="{{ $event->description }}{{$event->id}}">
+        <div class="card-block">
+          <div class="row">
 
-        {{ csrf_field() }}
-
-        <input type ="submit" value="Info" class="btn btn-primary">
-      </form><br>
-      <form action="{{ url('/user/events/leave', [$event->id]) }}" method="POST">
-
-        {{ csrf_field() }}
-
-        <input type ="submit" value="Verlassen" class="btn btn-primary">
-      </form><br>
-      @else
-      <form action="{{ url('/events', [$event->id]) }}" method="GET">
-
-        {{ csrf_field() }}
-
-        <input type ="submit" value="Info" class="btn btn-primary">
-      </form><br>
-      <form action="{{ url('/events/leave', [$event->id]) }}" method="POST">
-
-        {{ csrf_field() }}
-
-        <input type ="submit" value="Verlassen" class="btn btn-primary">
-      </form><br>
-      @endif
+           <div class="col-md-6">
+             <div class="col-sm-4">
+               <div class="list-group">
+                 <a href="#" class="list-group-item active">
+                   <strong class="mr-auto">Teilnehmer</strong>{{ $event->currentplayers }} / {{ $event->players }}
+                 </a>
+                  @foreach ($users as $user)
+                   <a href="#" class="list-group-item list-group-item-action">{{ $user->first_name }} {{ $user->last_name }}</a>
+                 @endforeach
+               </div>
+             </div>
+           </div>
+         </div>
+        </div>
+      </div>
     @endif
   @endforeach
+  </div>
+</div>
 
-  <!-- Veranstaltung vorhanden und vorbei-->
-
-  <p>Vergangene Veranstaltungen:</p>
-  @foreach($events as $event)
+<p>Vergangene Veranstaltungen:</p>
+<div id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="card">
+  @foreach ($events as $event)
     <?php
     $dt = new DateTime();
-    $dt = $dt->format('Y.m.d H:i:s');
+    $dt = $dt->format('Y-m-d H:i:s');
+    $users = $event->users;
      ?>
-     <!-- Nur Events die schon vorbei sind -->
+    @if($dt > $event->start)
 
-     @if($dt > $event->start)
-    {{$event->description }}
-    <?php
-    $datetime = new DateTime($event->start);
-    //$date = $event->start;
-    $date = date_format($datetime,"d.m.Y");
-    $endtime = new DateTime($event->end);
-    $start = date_format($datetime,"H:i");
-    $end = date_format($endtime,"H:i");
-    ?>
-    {{$date}} {{$start}} - {{$end}}
-    {{$event->players}}/{{$event->currentplayers}}
-      @if($role == 'admin')
-      <form action="{{ url('/admin/events', [$event->id]) }}" method="GET">
+      <div class="card-header" role="tab" id="headingOne">
+        <div class="row">
+          <h5 class="mb-0 mr-auto">
+             <a data-toggle="collapse" data-parent="#accordion" href="#{{ $event->description }}{{$event->id}}" aria-expanded="false" aria-controls="{{ $event->description }}{{$event->id}}" class="sports-vert">
+               <?php
+                 $datetime = new DateTime($event->start);
+                 //$date = $event->start;
+                 $date = date_format($datetime,"d.m.Y");
+                 $endtime = new DateTime($event->end);
+                 $start = date_format($datetime,"H:i");
+                 $end = date_format($endtime,"H:i");
+               ?>
+               {{$date}} {{$start}} - {{$end}}
+               {{$event->currentplayers}}/{{$event->players}}
+               {{$event->description }}
+               {{$event->id }}
+             </a>
+          </h5>
 
-        {{ csrf_field() }}
+          <div style="margin: 0px" class="row">
+            @if($role == 'admin')
+              <a href="/admin/events/{{ $event->id }}/edit" class="btn btn-primary">bearbeiten</a>
 
-        <input type ="submit" value="Info" class="btn btn-primary">
-      </form><br>
-      <form action="{{ url('/admin/events/leave', [$event->id]) }}" method="POST">
+              <form action="{{ url('/admin/events/leave', [$event->id]) }}" method="POST">
 
-        {{ csrf_field() }}
+                {{ csrf_field() }}
 
-        <input type ="submit" value="Verlassen" class="btn btn-primary">
-      </form><br>
-      @elseif($role == 'kunde')
-      <form action="{{ url('/user/events', [$event->id]) }}" method="GET">
+                <input type ="submit" value="Verlassen" class="btn btn-primary">
+              </form><br>
+            @elseif($role == 'kunde')
+              @if($event->user_id == $id)
+              <a href="/user/events/{{ $event->id }}/edit" class="btn btn-primary">bearbeiten</a>
+              @endif
+              <form action="{{ url('/user/events/leave', [$event->id]) }}" method="POST">
 
-        {{ csrf_field() }}
+                {{ csrf_field() }}
 
-        <input type ="submit" value="Info" class="btn btn-primary">
-      </form><br>
-      <form action="{{ url('/user/events/leave', [$event->id]) }}" method="POST">
+                <input type ="submit" value="Verlassen" class="btn btn-primary">
+              </form><br>
+            @else
+            <a href="/events/{{ $event->id }}/edit" class="btn btn-primary">bearbeiten</a>
 
-        {{ csrf_field() }}
+              <form action="{{ url('/events/leave', [$event->id]) }}" method="POST">
 
-        <input type ="submit" value="Verlassen" class="btn btn-primary">
-      </form><br>
-      @else
-      <form action="{{ url('/events', [$event->id]) }}" method="GET">
+                {{ csrf_field() }}
 
-        {{ csrf_field() }}
+                <input type ="submit" value="Verlassen" class="btn btn-primary">
+              </form><br>
+            @endif
+          </div>
+      </div>
+  </div>
+      <div id="{{ $event->description }}{{$event->id}}" class="collapse" role="tabpanel" aria-labelledby="{{ $event->description }}{{$event->id}}">
+        <div class="card-block">
+          <div class="row">
 
-        <input type ="submit" value="Info" class="btn btn-primary">
-      </form><br>
-      <form action="{{ url('/events/leave', [$event->id]) }}" method="POST">
-
-        {{ csrf_field() }}
-
-        <input type ="submit" value="Verlassen" class="btn btn-primary">
-      </form><br>
-      @endif
-      @endif
+           <div class="col-md-6">
+             <div class="col-sm-4">
+               <div class="list-group">
+                 <a href="#" class="list-group-item active">
+                   <strong class="mr-auto">Teilnehmer</strong>{{ $event->currentplayers }} / {{ $event->players }}
+                 </a>
+                  @foreach ($users as $user)
+                   <a href="#" class="list-group-item list-group-item-action">{{ $user->first_name }} {{ $user->last_name }}</a>
+                 @endforeach
+               </div>
+             </div>
+           </div>
+         </div>
+        </div>
+      </div>
+    @endif
   @endforeach
+  </div>
+</div>
 @endif
 
 @endsection

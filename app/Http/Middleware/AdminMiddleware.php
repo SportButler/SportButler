@@ -21,7 +21,7 @@ class AdminMiddleware
         elseif(Sentinel::check() && Sentinel::getUser()->roles()->first()->slug == 'lieferant')
           return redirect('/');
         elseif(Sentinel::check() && Sentinel::getUser()->roles()->first()->slug == 'kunde')
-            return redirect('/startseite');
+          return redirect('/startseite');
         else
           return redirect('/login');
     }

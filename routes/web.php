@@ -98,6 +98,10 @@ Route::group(['middleware' => 'admin'], function(){
 
   Route::post('/admin/event/create', 'EventsController@store');
 
+  Route::get('/admin/events/{event}/edit', 'EventsController@edit');
+
+  Route::post('/admin/events/{event}/edit', 'EventsController@update');
+
   Route::post('/admin/events/destroy/{event}', 'EventsController@destroy');
 
   Route::post('/admin/events/join/{event}', 'EventsController@join');
@@ -133,6 +137,10 @@ Route::group(['middleware' => 'kunde'], function(){
   Route::get('/user/create', 'EventsController@create');
 
   Route::post('/user/create', 'EventsController@store');
+
+  Route::get('/user/events/{event}/edit', 'EventsController@edit');
+
+  Route::post('/user/events/{event}/edit', 'EventsController@update');
 
   Route::post('/user/events/destroy/{event}', 'EventsController@destroy');
 
@@ -238,6 +246,10 @@ Route::group(['middleware' => 'lieferant'], function(){
 
   Route::post('/create', 'EventsController@store');
 
+  Route::get('/events/{event}/edit', 'EventsController@edit');
+
+  Route::post('/events/{event}/edit', 'EventsController@update');
+
   Route::post('/events/destroy/{event}', 'EventsController@destroy');
 
   Route::post('/events/join/{event}', 'EventsController@join');
@@ -273,7 +285,7 @@ Route::group(['middleware' => 'visitors'], function(){
 
   Route::get('/activate/{email}/{activationCode}', 'ActivationController@activate');
 
-  Route::get('/login', 'LoginController@index');
+  Route::get('/login', 'LoginController@index')->name('Home');
 
   Route::post('/login', 'LoginController@login');
 
@@ -284,6 +296,8 @@ Route::group(['middleware' => 'visitors'], function(){
   })->name('sendmail');
 
 });
+
+Route::get('/onepage', 'OnepageController@index');
 
 Route::post('/logout', 'LoginController@logout');
 

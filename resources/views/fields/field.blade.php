@@ -35,7 +35,7 @@
                 <i class="fa fa-pencil field-btn-circle rounded-circle"></i>
             </a>
         @endif
-                    
+
                 </div>
             </div>
         </div>
@@ -49,7 +49,15 @@
             </div>
             <div class="" style="color: #FFF; padding-left: 10px;">
                 <p class="mb-0 field-bold">Stundenpreis</p>
-                <p class="mb-0 field-bold" style="color: #f93a34">€{{ $field->priceperhour }}</p>
+                <p class="mb-0 field-bold"
+                @if($field->priceperhour == 0)
+                style="color:green">
+                kostenlos
+                @else
+                style="color: #f93a34">
+                € {{ $field->priceperhour }}
+                @endif
+                </p>
             </div>
         </div>
         <hr class="field-hr">
@@ -71,7 +79,11 @@
                 <p class="mb-0 field-bold">Sportarten</p>
                 <p class="mb-0 field-bold" style="color: #f93a34">
                     @foreach($field->sports as $sport)
-                    {{ $sport->name}}, 
+                    @if($sport == $field->sports->last())
+                    {{ $sport->name}}
+                    @else
+                    {{ $sport->name}},
+                    @endif
                     @endforeach
                 </p>
             </div>

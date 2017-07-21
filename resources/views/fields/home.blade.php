@@ -13,7 +13,7 @@
 
 <div class="row" style="margin-bottom: 40px; margin-top: 30px;">
 
-    <div class="col-md-3" style="text-align: left;">
+    <div class="col-xs-3" style="text-align: left;">
       <!-- <div class="form-group">
         <select class="select-tabs btn btn-block btn-red" id="exampleSelect1">
             <option data-target="#home">Home</option>
@@ -24,10 +24,10 @@
       </div>
 -->    </div>
 
-    <div class="col-md-6" style="text-align: center;">
+    <div class="col-xs-6" style="text-align: center;">
             <h1 style="margin-bottom: 0px; color: #c1272d;" class=" mr-auto">Startseite</h1>
     </div>
-    <div class="col-md-3" style="text-align: right;">
+    <div class="col-xs-3" style="text-align: right;">
 
      @if($role == 'lieferant')
         <a class="btn btn-red btn-block" href="/create">
@@ -248,7 +248,7 @@ Veranstaltungs Zeitraum
                     allDaySlot: false,
                     height: 'auto',
                     displayEventTime: false,
-                    defaultView: 'month',
+                    defaultView: 'agendaWeek',
                     // put your options and callbacks here
                     header: {
                         left: 'prev,next today',

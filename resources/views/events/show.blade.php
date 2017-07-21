@@ -55,6 +55,8 @@
 
    @if($event->users->contains($id))
     @if($role == 'lieferant')
+    <a href="/events/{{ $event->id }}/edit" class="btn btn-primary">bearbeiten</a>
+
       <form action="{{ url('/events/leave', [$event->id]) }}" method="POST">
 
         {{ csrf_field() }}
@@ -62,6 +64,8 @@
         <input type ="submit" value="Verlassen" class="btn btn-primary">
       </form>
     @elseif($role == 'admin')
+    <a href="/admin/events/{{ $event->id }}/edit" class="btn btn-primary">bearbeiten</a>
+
       <form action="{{ url('/admin/events/leave', [$event->id]) }}" method="POST">
 
         {{ csrf_field() }}
@@ -69,6 +73,9 @@
         <input type ="submit" value="Verlassen" class="btn btn-primary">
       </form>
     @else
+    @if($event->user_id == $id)
+    <a href="/user/events/{{ $event->id }}/edit" class="btn btn-primary">bearbeiten</a>
+    @endif
       <form action="{{ url('/user/events/leave', [$event->id]) }}" method="POST">
 
         {{ csrf_field() }}
@@ -123,11 +130,6 @@
     </div>
       </div>
     </div>
-
-
-
-
-
 
 
 

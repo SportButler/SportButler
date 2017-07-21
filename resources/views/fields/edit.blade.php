@@ -12,7 +12,7 @@
 <div class="row border-head">
         <h1 style="margin-bottom: 0px" class=" mr-auto">Feld bearbeiten</h1>
         <div>
-           <button type="submit" class="btn btn-primary ">Feld bearbeiten!</button>
+           <button type="submit" class="btn btn-primary ">Änderungen speichern</button>
         @if($role == 'lieferant')
           <a href="/fields" class="btn btn-danger">abbrechen</a>
         @else

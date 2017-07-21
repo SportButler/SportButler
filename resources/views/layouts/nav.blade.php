@@ -2,10 +2,11 @@
   <div class="container">
     <div class="row">
       <div class="col-md-0"></div>
-      <div class="col-md-9">
-        <img src="http://dbserver.team-upp.com/img/logo.png" alt="logo" style="height:250px; display: block; margin-left: 0; margin-right: auto; background-color: none; border-radius: 100%;"></img>
+      <div class="col-md-6">
+        <img src="http://dbserver.team-upp.com/img/logo.png" alt="logo" style="height:250px; display: block; margin-left: 0; margin-right: auto; background-color: none; border-radius: 100%; padding-top: 25px;"></img>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-6">
+          <img src="../img/butler.png" alt="butler" style="height:300px; display: block; margin-left: 0; margin-right: auto; background-color: none;"></img>
         @if(Sentinel::check())
         <form method="post" action="/logout">
           <div class="pull-right">
@@ -29,12 +30,12 @@
         <ul class="navbar-nav m-auto">
           @if(Sentinel::check() && Sentinel::getUser()->roles()->first()->slug == 'admin')
 
-          <li class="nav-item"><a class="nav-link" href="/admin">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="/admin">Startseite</a></li>
           <li class="nav-item"><a class="nav-link" href="/admin/events">Meine Veranstaltungen</a></li>
           <li class="nav-item"><a class="nav-link" href="/admin/mitglieder">Meine Mitglieder</a></li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			                      Verwaltung
+			                      Management
 			                    </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <a class="dropdown-item" href="/admin/clubs">Verein</a>
@@ -49,20 +50,20 @@
 
           @elseif(Sentinel::check() && Sentinel::getUser()->roles()->first()->slug == 'kunde')
 
-          <li class="nav-item"><a class="nav-link" href="/startseite">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="/startseite">Startseite</a></li>
           <li class="nav-item"><a class="nav-link" href="/user/clubs">Mein Verein</a></li>
           <li class="nav-item"><a class="nav-link" href="/user/events">Meine Veranstaltungen</a></li>
           <li class="nav-item"><a class="nav-link" href="/user/account/{{ Sentinel::getUser()->id }}/edit">Mein Account</a></li>
 
           @elseif(Sentinel::check() && Sentinel::getUser()->roles()->first()->slug == 'lieferant')
-          <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="/">Startseite</a></li>
           <li class="nav-item"><a class="nav-link" href="/events">Meine Veranstaltungen</a></li>
           <!-- <li class="nav-item"><a class="nav-link" href="/uebersicht">Übersicht</a></li> -->
 
 
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Verwaltung
+                      Management
                     </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <a class="dropdown-item" href="/clubs">Verein</a>
@@ -90,12 +91,13 @@
 @else @endif
 <div class="headlogo hidden-lg-up">
   <div class="container">
-    <div class="row">
-      <div class="col-3 invisible"></div>
-      <div class="col-6 invisible">
-        <img src="http://dbserver.team-upp.com/img/logo.png" alt="logo" style="height:100px; display: block; margin-left: auto; margin-right: auto; background-color: white; border-radius: 100%;"></img>
+    <div class="row hidden-sm-down">
+      <div class="col-md-0"></div>
+      <div class="col-md-3">
+        <img src="http://dbserver.team-upp.com/img/logo.png" alt="logo" style="height:250px; display: block; margin-left: 0; margin-right: auto; background-color: none; border-radius: 100%; padding-top: 25px;"></img>
       </div>
-      <div class="col-3">
+      <div class="col-md-9">
+          <img src="../img/butler.png" alt="butler" style="height:300px; display: block; margin-left: 0; margin-right: auto; background-color: none;"></img>
         @if(Sentinel::check())
         <form method="post" action="/logout">
           <div class="pull-right">
@@ -105,6 +107,13 @@
           @endif
         </form>
       </div>
+    </div>
+    <div class="row hidden-md-up">
+      <div class="col-md-0"></div>
+      <div class="col-md-12">
+        <img src="http://dbserver.team-upp.com/img/logo.png" alt="logo" style="height:250px; display: block; margin-left: auto; margin-right: auto; background-color: none; border-radius: 100%; padding-top: 25px;"></img>
+      </div>
+
     </div>
   </div>
 </div>

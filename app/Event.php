@@ -19,5 +19,8 @@ class Event extends Model
   public function club(){
     return $this->belongsTo(Club::class);
   }
+  public function hasField($field){
+    return $this->field()->where('field_id', $field->id)->exists();
+  }
 
 }

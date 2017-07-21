@@ -45,13 +45,24 @@ margin-bottom: 50px;
  */
 
 .headlogo {
-background-image: url("http://dbserver.team-upp.com/img/head-background1.jpg");
 width: 100%;
 height: 300px;
 padding-bottom: 25px;
-padding-top: 25px;
+padding-top: 0px;
 background-size: cover;
 background-position: center;
+
+
+background: rgba(210,218,221,1);
+background: -moz-linear-gradient(-45deg, rgba(210,218,221,1) 0%, rgba(203,213,215,1) 100%);
+background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(210,218,221,1)), color-stop(100%, rgba(203,213,215,1)));
+background: -webkit-linear-gradient(-45deg, rgba(210,218,221,1) 0%, rgba(203,213,215,1) 100%);
+background: -o-linear-gradient(-45deg, rgba(210,218,221,1) 0%, rgba(203,213,215,1) 100%);
+background: -ms-linear-gradient(-45deg, rgba(210,218,221,1) 0%, rgba(203,213,215,1) 100%);
+background: linear-gradient(135deg, rgba(210,218,221,1) 0%, rgba(203,213,215,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d2dadd', endColorstr='#cbd5d7', GradientType=1 );
+
+
 }
 
 .blog-masthead {
@@ -647,4 +658,16 @@ th.fc-axis.fc-widget-header {
 
 button:focus {
     outline: none !important;
+}
+
+.login-card-block {
+    padding: 0px;
+}
+
+.login-mediafield {
+    margin-top: 10px;
+    background-color: rgba(0,0,0,0);
+    padding: 0px;
+    box-shadow: none;
+    
 }

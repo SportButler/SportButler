@@ -52,7 +52,7 @@ class EventsController extends Controller
         $role = 'admin';
       }
 
-      return view('events.index', compact('events', 'role'));
+      return view('events.index', compact('events', 'role', 'id'));
   }
 
 
@@ -180,6 +180,7 @@ class EventsController extends Controller
                 $event->field_id = $field_id;
                 $event->start = $startfield;
                 $event->end = $endfield;
+                $event->user_id = $id;
                 $event->save();
 
                 $user_id = Sentinel::getUser()->id;
@@ -196,6 +197,7 @@ class EventsController extends Controller
                     $event->field_id = $field_id;
                     $event->start = $startfield;
                     $event->end = $endfield;
+                    $event->user_id = $id;
                     $event->save();
 
                     $user_id = Sentinel::getUser()->id;
@@ -232,6 +234,7 @@ class EventsController extends Controller
       $event->club_id = $club_id;
       $event->start = $startDateTime;
       $event->end = $endDateTime;
+      $event->user_id = $id;
       $event->save();
 
       $user_id = Sentinel::getUser()->id;
@@ -319,5 +322,80 @@ class EventsController extends Controller
     return response()->json($data);
   }
 
+  public function edit($id)
+  {
+    $event = Event::find($id);
 
+    $id = Sentinel::getUser()->id;
+
+    $user = User::find($id);
+
+    $clubs = $user->clubs();
+
+    $club = $clubs->first();
+
+    $club_id = $club->id;
+
+    $fields = Club::find($club_id)->fields;
+
+    $user = Sentinel::getUser();
+
+
+    if($user->inRole('lieferant')){
+      $role = 'lieferant';
+    }
+
+    if($user->inRole('kunde')){
+      $role = 'kunde';
+    }
+
+    if($user->inRole('admin')){
+      $role = 'admin';
+    }
+
+    $sports = Club::find($club_id)->sports;
+
+    return view('events.edit', compact('event', 'sports', 'role', 'fields'));
+  }
+
+  public function update(Request $request, $id)
+  {
+      $start = $request->date.' '.$request->start;
+      $start = new DateTime($start);
+      $end = $request->date.' '.$request->end;
+      $end = new DateTime($end);
+
+      $event = Event::find($id);
+      $event->description = $request->description;
+      $event->players = $request->players;
+      $event->start = $start;
+      $event->end = $end;
+      $event->sport_id = $request->sport_id;
+      $event->save();
+
+      $id = Sentinel::getUser()->id;
+
+      $user = User::find($id);
+
+      $user = Sentinel::getUser();
+
+      if($user->inRole('lieferant')){
+        $role = 'lieferant';
+      }
+
+      if($user->inRole('kunde')){
+        $role = 'kunde';
+      }
+
+      if($user->inRole('admin')){
+        $role = 'admin';
+      }
+
+    //  Field::find($id)->update($request->all());
+      if($role == 'lieferant'){
+        return redirect ('/');
+      }else{
+        return redirect ('/admin');
+      }
+  }
 }
