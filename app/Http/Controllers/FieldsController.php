@@ -160,7 +160,7 @@ class FieldsController extends Controller
      */
     public function show(Field $field)
     {
-      return view('fields.show', compact('field'));
+
     }
 
     /**

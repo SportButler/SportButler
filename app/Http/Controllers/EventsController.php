@@ -13,16 +13,7 @@ use DateTime;
 use DateInterval;
 use DatePeriod;
 
-class EventsController extends Controller
-
-{
-
-  public function statistics(){
-      $fields = Field::all();
-      $events = Event::all();
-
-      return view('events.statistics', compact('events', 'fields'));
-  }
+class EventsController extends Controller{
 
   public function index(){
 
@@ -174,7 +165,6 @@ class EventsController extends Controller
 
             ]);
 
-
                 $event = Event::create(request(['sport_id', 'players', 'currentplayers', 'description']));
                 $event->club_id = $club_id;
                 $event->field_id = $field_id;
@@ -232,8 +222,8 @@ class EventsController extends Controller
 
       $event = Event::create(request(['field_id', 'sport_id', 'players', 'currentplayers', 'description']));
       $event->club_id = $club_id;
-      $event->start = $startDateTime;
-      $event->end = $endDateTime;
+      $event->start = $start;
+      $event->end = $end;
       $event->user_id = $id;
       $event->save();
 

@@ -2,16 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Sentinel;
-use App\Sport;
-use App\Event;
-use App\Field;
-use App\User;
-use App\Club;
 use Illuminate\Http\Request;
-use MaddHatter\LaravelFullcalendar\Facades\Calendar;
+use App\Field;
+use App\Event;
 
-class UebersichtController extends Controller
+class StatisticsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,23 +15,10 @@ class UebersichtController extends Controller
      */
     public function index()
     {
-      $id = Sentinel::getUser()->id;
-
-      $user = User::find($id);
-
-      $clubs = $user->clubs();
-
-      $club = $clubs->first();
-
-      $club_id = $club->id;
-
-      $sports = Club::find($club_id)->sports;
-
       $fields = Field::all();
+      $events = Event::all();
 
-      $fields = $fields->where('club_id', $club_id);
-
-      return view('uebersicht.index', compact('fields', 'events', 'sports', 'id'));
+      return view('statistics.index', compact('events', 'fields'));
     }
 
     /**

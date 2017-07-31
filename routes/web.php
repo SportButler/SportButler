@@ -117,7 +117,7 @@ Route::group(['middleware' => 'admin'], function(){
 
 
 
-  Route::get('/admin/statistics', 'EventsController@statistics');
+  Route::get('/admin/statistics', 'StatisticsController@index');
 
 });
 
@@ -265,7 +265,7 @@ Route::group(['middleware' => 'lieferant'], function(){
 
 
 
-  Route::get('/statistics', 'EventsController@statistics');
+  Route::get('/statistics', 'StatisticsController@index');
 
 
 

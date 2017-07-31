@@ -15,6 +15,9 @@ class KundenController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * Check if User belongs to Club
+     * Everything else like HomeController
+     *
      * @return \Illuminate\Http\Response
      */
     public function index()
@@ -42,7 +45,6 @@ class KundenController extends Controller
         $events = Club::find($club_id)->events;
 
         $fields = Club::find($club_id)->fields;
-
 
       }
 

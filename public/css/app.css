@@ -8,6 +8,12 @@
   }
 }
 
+.logout-link {
+    position: absolute;
+    top: 10;
+    right: 0;
+}
+
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #555;
@@ -480,6 +486,19 @@ transform: translateY(-50%);
     height: auto;
 }
 
+@media (min-width: 768px) {
+.field-sportimage {
+    width: 100px;
+}
+}
+
+@media (min-width: 992px) {
+.field-sportimage {
+    width: 160px;
+}
+
+}
+
 .field-btn-circle {
     background-color: #FFF;
     padding: 10px;
@@ -504,6 +523,7 @@ transform: translateY(-50%);
   text-align: center;
   text-shadow: -1px 0 #c1272d, 0 1px #c1272d, 1px 0 #c1272d, 0 -1px #c1272d;
   color: #FFF;
+  padding-top: 10px;
 }
 
 .max-players {

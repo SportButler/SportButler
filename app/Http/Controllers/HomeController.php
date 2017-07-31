@@ -16,6 +16,8 @@ class HomeController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * Home/Startseite
+     *
      * @return \Illuminate\Http\Response
      */
     public function index()
@@ -52,7 +54,7 @@ class HomeController extends Controller
 
       $color = 'green';
 
-      return view('fields.home', compact('events', 'sports', 'id', 'color', 'fields', 'role'));
+      return view('home.index', compact('events', 'sports', 'id', 'color', 'fields', 'role'));
     }
 
     /**
@@ -62,7 +64,7 @@ class HomeController extends Controller
      */
     public function create()
     {
-      return view('fields.create', compact('field'));
+
     }
 
     /**
@@ -74,22 +76,6 @@ class HomeController extends Controller
     public function store(Request $request)
     {
 
-      $this->validate(request(), [
-
-          'name' => 'required',
-
-          'maxplayers' => 'required',
-
-          'priceperhour' => 'required',
-
-          'description' => 'required'
-
-      ]);
-
-      Field::create(request(['name', 'maxplayers', 'priceperhour', 'description']));
-
-      return redirect('/');
-
     }
 
     /**
@@ -100,7 +86,7 @@ class HomeController extends Controller
      */
     public function show(Field $field)
     {
-      return view('fields.show', compact('field'));
+
     }
 
     /**
@@ -111,8 +97,7 @@ class HomeController extends Controller
      */
     public function edit($id)
     {
-      $field = Field::find($id);
-      return view('fields.edit', compact('field'));
+
     }
 
     /**
@@ -124,16 +109,6 @@ class HomeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $field = Field::find($id);
-        $field->name = $request->name;
-        $field->maxplayers = $request->maxplayers;
-        $field->priceperhour = $request->priceperhour;
-        $field->description = $request->description;
-        $field->save();
-
-      //  Field::find($id)->update($request->all());
-
-        return redirect ('/');
 
     }
 
@@ -145,8 +120,6 @@ class HomeController extends Controller
      */
     public function destroy($id)
     {
-        //Field:destroy($id);
-        Field::where('id', $id)->delete();
-        return redirect ('/');
+
     }
 }

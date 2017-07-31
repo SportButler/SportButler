@@ -131,8 +131,6 @@ class ClubController extends Controller
       $club->contact = $request->contact;
       $club->save();
 
-    //  Field::find($id)->update($request->all());
-
       $user = Sentinel::getUser();
 
       if($user->inRole('lieferant')){
