@@ -8,7 +8,7 @@
       <div class="col-md-6">
           <img src="../img/butler.png" alt="butler" style="height:300px; display: block; margin-left: 0; margin-right: auto; background-color: none;"></img>
         @if(Sentinel::check())
-        <form method="post" action="/logout">
+        <form class="logout-link" method="post" action="/logout">
           <div class="pull-right">
             {{ csrf_field() }}
             <button class="logout-btn"><i class="fa fa-sign-out"></i> Logout</button>

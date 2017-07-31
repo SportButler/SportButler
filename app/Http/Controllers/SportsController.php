@@ -215,8 +215,6 @@ class SportsController extends Controller
         $role = 'admin';
       }
 
-      
-
       Sport::where('id', $id)->delete();
 
       if($role == 'lieferant'){

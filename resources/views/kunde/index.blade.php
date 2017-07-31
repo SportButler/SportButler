@@ -276,13 +276,13 @@ Veranstaltungs Zeitraum
                           title : '{{ $event->field->name }}  {{ $event->currentplayers }}/{{ $event->players }}',
                           start : '{{ $event->start }}',
                           end : '{{ $event->end }}',
-                          url : 'http://dbserver.team-upp.com/user/events/{{ $event->id }}',
+                          url : '/user/events/{{ $event->id }}',
                           color: 'red'
                           @else
                           title : '{{ $event->field->name }}  {{ $event->currentplayers }}/{{ $event->players}}',
                           start : '{{ $event->start }}',
                           end : '{{ $event->end }}',
-                          url : 'http://dbserver.team-upp.com/user/events/{{ $event->id }}',
+                          url : '/user/events/{{ $event->id }}',
                           color: 'green'
                           @endif
 

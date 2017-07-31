@@ -5,7 +5,7 @@
   Sie haben sich zur Zeit für keine Veranstaltung angemeldet!
 @else
 <!-- Veranstaltung vorhanden und bevorstehend-->
-<p>Bevorstehende Veranstaltungen (test):</p>
+<p>Bevorstehende Veranstaltungen:</p>
 <div id="accordion" role="tablist" aria-multiselectable="true">
   <div class="card">
   @foreach ($events as $event)
@@ -37,32 +37,32 @@
 
           <div style="margin: 0px" class="row">
             @if($role == 'admin')
-              <a href="/admin/events/{{ $event->id }}/edit" class="btn btn-primary">bearbeiten</a>
+              <a style="margin-right: 5px;" href="/admin/events/{{ $event->id }}/edit" class="btn btn-primary">bearbeiten</a>
 
-              <form action="{{ url('/admin/events/leave', [$event->id]) }}" method="POST">
+              <form style="margin-bottom: 0px;" action="{{ url('/admin/events/leave', [$event->id]) }}" method="POST">
 
                 {{ csrf_field() }}
 
-                <input type ="submit" value="Verlassen" class="btn btn-primary">
+                <input style="margin-bottom: 0px;" type ="submit" value="Verlassen" class="btn btn-primary">
               </form><br>
             @elseif($role == 'kunde')
               @if($event->user_id == $id)
-              <a href="/user/events/{{ $event->id }}/edit" class="btn btn-primary">bearbeiten</a>
+              <a style="margin-right: 5px;" href="/user/events/{{ $event->id }}/edit" class="btn btn-primary">bearbeiten</a>
               @endif
-              <form action="{{ url('/user/events/leave', [$event->id]) }}" method="POST">
+              <form style="margin-bottom: 0px;" action="{{ url('/user/events/leave', [$event->id]) }}" method="POST">
 
                 {{ csrf_field() }}
 
-                <input type ="submit" value="Verlassen" class="btn btn-primary">
+                <input style="margin-bottom: 0px;" type ="submit" value="Verlassen" class="btn btn-primary">
               </form><br>
             @else
-            <a href="/events/{{ $event->id }}/edit" class="btn btn-primary">bearbeiten</a>
+            <a style="margin-right: 5px;" href="/events/{{ $event->id }}/edit" class="btn btn-primary">bearbeiten</a>
 
-              <form action="{{ url('/events/leave', [$event->id]) }}" method="POST">
+              <form style="margin-bottom: 0px;" action="{{ url('/events/leave', [$event->id]) }}" method="POST">
 
                 {{ csrf_field() }}
 
-                <input type ="submit" value="Verlassen" class="btn btn-primary">
+                <input style="margin-bottom: 0px;" type ="submit" value="Verlassen" class="btn btn-primary">
               </form><br>
             @endif
           </div>
@@ -124,9 +124,9 @@
 
           <div style="margin: 0px" class="row">
             @if($role == 'admin')
-              <a href="/admin/events/{{ $event->id }}/edit" class="btn btn-primary">bearbeiten</a>
+              <a style="margin-right: 5px;" href="/admin/events/{{ $event->id }}/edit" class="btn btn-primary">bearbeiten</a>
 
-              <form action="{{ url('/admin/events/leave', [$event->id]) }}" method="POST">
+              <form style="margin-bottom: 0px;" action="{{ url('/admin/events/leave', [$event->id]) }}" method="POST">
 
                 {{ csrf_field() }}
 
@@ -134,22 +134,22 @@
               </form><br>
             @elseif($role == 'kunde')
               @if($event->user_id == $id)
-              <a href="/user/events/{{ $event->id }}/edit" class="btn btn-primary">bearbeiten</a>
+              <a style="margin-right: 5px;" href="/user/events/{{ $event->id }}/edit" class="btn btn-primary">bearbeiten</a>
               @endif
-              <form action="{{ url('/user/events/leave', [$event->id]) }}" method="POST">
+              <form style="margin-bottom: 0px;" action="{{ url('/user/events/leave', [$event->id]) }}" method="POST">
 
                 {{ csrf_field() }}
 
-                <input type ="submit" value="Verlassen" class="btn btn-primary">
+                <input style="margin-bottom: 0px;" type ="submit" value="Verlassen" class="btn btn-primary">
               </form><br>
             @else
-            <a href="/events/{{ $event->id }}/edit" class="btn btn-primary">bearbeiten</a>
+            <a style="margin-right: 5px;" href="/events/{{ $event->id }}/edit" class="btn btn-primary">bearbeiten</a>
 
-              <form action="{{ url('/events/leave', [$event->id]) }}" method="POST">
+              <form style="margin-bottom: 0px;" action="{{ url('/events/leave', [$event->id]) }}" method="POST">
 
                 {{ csrf_field() }}
 
-                <input type ="submit" value="Verlassen" class="btn btn-primary">
+                <input style="margin-bottom: 0px;" type ="submit" value="Verlassen" class="btn btn-primary">
               </form><br>
             @endif
           </div>
